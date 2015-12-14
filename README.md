@@ -1,4 +1,5 @@
-# BiuEditText
+
+# GiftRainView
 还记得有一招从天而降的功夫？GiftRainView，一个用来下金币，下红包的View
 
 # 直接看效果
@@ -20,9 +21,6 @@
         app:gift_background="@android:color/white"
         app:gift_count="20"
         app:gift_duration="2000" />
-      
-    
-       
 ####attrs:
 
 | 参数 | 类型 |含义|
@@ -72,3 +70,4 @@ GiftRainView is opensource, contribution and feedback are welcomed
 [CSDN](http://blog.csdn.net/mobilexu)
 
 [weibo](http://weibo.com/3654795601/profile?topnav=1&wvr=6)
+

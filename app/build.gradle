@@ -21,5 +21,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':library')
+    compile 'com.xujinyang.GiftRainView:library:1.0.0'
+//    compile project(':library')
 }
