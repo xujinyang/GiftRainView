@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DropDownStyle">
+        <attr name="gift_count" format="integer" />
+        <attr name="gift_duration" format="integer" />
+        <attr name="gift_background" format="color" />
+    </declare-styleable>
+</resources>
