@@ -11,8 +11,8 @@ buildscript {
 
         //上传版本
 //        classpath 'com.github.dcendents:android-maven-plugin:1.2'
-//        gradlew install
-//        gradlew bintrayUpload
+//        gradle install
+//        gradle bintrayUpload
 
     }
 }
