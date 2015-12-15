@@ -10,7 +10,7 @@
 ### Step 1
 ##### Install with gradle
         dependencies {
-            compile 'com.xujinyang.GiftRainView:library:1.0.0'
+            compile 'com.xujinyang.GiftRainView:library:1.1.0'
         }
 ### Step 2
 
