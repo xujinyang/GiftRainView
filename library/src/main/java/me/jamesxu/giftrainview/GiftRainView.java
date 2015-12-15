@@ -23,6 +23,7 @@ public class GiftRainView extends View {
     private int[] imgs;
     private int count;
     private int background;
+    private int speed;
 
     private ArrayList<Gift> giftList;
     private Matrix m = new Matrix();
@@ -45,7 +46,7 @@ public class GiftRainView extends View {
         }
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.DropDownStyle);
         count = typedArray.getInt(R.styleable.DropDownStyle_gift_count, 20);
-        duration = typedArray.getInt(R.styleable.DropDownStyle_gift_duration, 3000);
+        speed = typedArray.getInt(R.styleable.DropDownStyle_gift_speed, 100);
         background = typedArray.getInt(R.styleable.DropDownStyle_gift_background, android.R.color.white);
         typedArray.recycle();
         init();
@@ -90,7 +91,7 @@ public class GiftRainView extends View {
         for (int i = 0; i < quantity; ++i) {
             Bitmap originalBitmap = BitmapFactory
                     .decodeResource(getResources(), imgs[i % imgs.length]);
-            Gift gift = new Gift(getWidth(), originalBitmap);
+            Gift gift = new Gift(getWidth(), originalBitmap, speed);
             gift.bitmap = bitmapMap.get(gift.width);
             if (gift.bitmap == null) {
                 gift.bitmap = Bitmap.createScaledBitmap(originalBitmap,
@@ -148,13 +149,13 @@ public class GiftRainView extends View {
         private int width, height;
         private Bitmap bitmap;
 
-        public Gift(float xRange, Bitmap originalBitmap) {
+        public Gift(float xRange, Bitmap originalBitmap, int speed) {
             width = (int) (originalBitmap.getWidth() * (Math.random() + 0.3));
             float hwRatio = originalBitmap.getHeight() * 1.0f / originalBitmap.getWidth();
             height = (int) (width * hwRatio);
             x = (float) Math.random() * (xRange - width);
             y = 0 - (height + (float) Math.random() * height);
-            speed = 50 + (float) Math.random() * 150;
+            this.speed = speed + (float) Math.random() * 550;
             rotation = (float) Math.random() * 180 - 90;
             rotationSpeed = (float) Math.random() * 90 - 45;
         }

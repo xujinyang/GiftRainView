@@ -14,20 +14,21 @@
         }
 ### Step 2
 
-   <me.jamesxu.giftrainview.GiftRainView
-        android:id="@+id/dropview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:gift_background="@android:color/white"
-        app:gift_count="20"
-        app:gift_duration="2000" />
+       <me.jamesxu.giftrainview.GiftRainView
+            android:id="@+id/dropview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:gift_background="@android:color/white"
+            app:gift_count="20"
+            app:gift_speed="100" />
+      
 ####attrs:
 
 | 参数 | 类型 |含义|
 |--------|--------|--------|
 |gift_background|color|背景颜色|
 |gift_count|integer|屏幕内物体数量|
-|gift_duration|integer|动画时长|
+|gift_speed|integer|物体移动最小速度|
 
 ### Step 3
 ```

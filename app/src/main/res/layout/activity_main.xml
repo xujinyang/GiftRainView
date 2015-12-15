@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         app:gift_background="@android:color/white"
         app:gift_count="20"
-        app:gift_duration="2000" />
+        app:gift_speed="100" />
 
 </LinearLayout>
