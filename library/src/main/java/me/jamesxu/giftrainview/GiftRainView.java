@@ -8,10 +8,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by james on 14/12/15.
@@ -29,7 +29,8 @@ public class GiftRainView extends View {
     private Matrix m = new Matrix();
     private ValueAnimator animator;
     private long startTime, prevTime;
-    public static HashMap<Integer, Bitmap> bitmapMap = new HashMap<Integer, Bitmap>();
+//    public static HashMap<Integer, Bitmap> bitmapMap = new HashMap<Integer, Bitmap>();
+    public static SparseArray<Bitmap> bitmapArray = new SparseArray<>();
 
     public GiftRainView(Context context) {
         super(context, null);
@@ -92,11 +93,13 @@ public class GiftRainView extends View {
             Bitmap originalBitmap = BitmapFactory
                     .decodeResource(getResources(), imgs[i % imgs.length]);
             Gift gift = new Gift(getWidth(), originalBitmap, speed);
-            gift.bitmap = bitmapMap.get(gift.width);
+//            gift.bitmap = bitmapMap.get(gift.width);
+            gift.bitmap = bitmapArray.get(gift.width);
             if (gift.bitmap == null) {
                 gift.bitmap = Bitmap.createScaledBitmap(originalBitmap,
                         (int) gift.width, (int) gift.height, true);
-                bitmapMap.put(gift.width, gift.bitmap);
+//                bitmapMap.put(gift.width, gift.bitmap);
+                bitmapArray.put(gift.width, gift.bitmap);
             }
             giftList.add(gift);
         }
