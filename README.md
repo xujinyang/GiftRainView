@@ -35,6 +35,7 @@
 
 public class MainActivity extends Activity {
     private GiftRainView giftRainView;
+    private boolean isStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +43,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         giftRainView = (GiftRainView) findViewById(R.id.dropview);
         giftRainView.setImages(R.mipmap.ico_money, R.mipmap.ico_gold_money);
-    }
+        startRain();
 }
 
 ```
+##### 	如果想要动画停止有俩个方式 
+
+1. 等界面上所有的物体掉落完了之后，停止。 
+		giftRainView.stopRainDely();
+2. 立马停止动画，清空界面
+		giftRainView.stiopRainNow();
+
 
 License
 --------
