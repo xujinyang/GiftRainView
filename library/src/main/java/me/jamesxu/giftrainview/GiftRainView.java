@@ -29,8 +29,9 @@ public class GiftRainView extends View {
     private Matrix m = new Matrix();
     private ValueAnimator animator;
     private long startTime, prevTime;
-//    public static HashMap<Integer, Bitmap> bitmapMap = new HashMap<Integer, Bitmap>();
     public static SparseArray<Bitmap> bitmapArray = new SparseArray<>();
+
+    private boolean isDelyStop;
 
     public GiftRainView(Context context) {
         super(context, null);
@@ -63,9 +64,15 @@ public class GiftRainView extends View {
                 prevTime = nowTime;
                 for (int i = 0; i < giftList.size(); ++i) {
                     Gift gift = giftList.get(i);
+
                     gift.y += (gift.speed * secs);
+
                     if (gift.y > getHeight()) {
-                        gift.y = 0 - gift.height;
+                        if (isDelyStop) {
+                            giftList.remove(i);
+                        } else {
+                            gift.y = 0 - gift.height;
+                        }
                     }
                     gift.rotation = gift.rotation
                             + (gift.rotationSpeed * secs);
@@ -89,20 +96,46 @@ public class GiftRainView extends View {
     public void setGiftCount(int quantity) {
         if (imgs == null || imgs.length == 0)
             return;
-        for (int i = 0; i < quantity; ++i) {
+        int leftCount = Math.abs(quantity - giftList.size());
+        for (int i = 0; i < leftCount; ++i) {
             Bitmap originalBitmap = BitmapFactory
                     .decodeResource(getResources(), imgs[i % imgs.length]);
             Gift gift = new Gift(getWidth(), originalBitmap, speed);
-//            gift.bitmap = bitmapMap.get(gift.width);
             gift.bitmap = bitmapArray.get(gift.width);
             if (gift.bitmap == null) {
                 gift.bitmap = Bitmap.createScaledBitmap(originalBitmap,
                         (int) gift.width, (int) gift.height, true);
-//                bitmapMap.put(gift.width, gift.bitmap);
                 bitmapArray.put(gift.width, gift.bitmap);
             }
             giftList.add(gift);
         }
+    }
+
+
+    /**
+     * 将屏幕中的动画显示完成后，
+     */
+    public void stopRainDely() {
+        this.isDelyStop = true;
+    }
+
+    /**
+     * 立刻马上情况画布中所有的东西
+     */
+    public void stopRainNow() {
+        giftList.clear();
+        invalidate();
+        animator.cancel();
+    }
+
+
+    /**
+     * 重新开始显示动画
+     */
+    public void startRain() {
+        this.isDelyStop = false;
+        setGiftCount(count);
+        animator.start();
     }
 
     public void setImages(int... images) {
@@ -124,10 +157,8 @@ public class GiftRainView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         giftList.clear();
         setGiftCount(count);
-        animator.cancel();
         startTime = System.currentTimeMillis();
         prevTime = startTime;
-        animator.start();
     }
 
 
