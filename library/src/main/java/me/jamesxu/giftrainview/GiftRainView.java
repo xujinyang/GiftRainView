@@ -24,6 +24,8 @@ public class GiftRainView extends View {
     private int count;
     private int background;
     private int speed;
+    private float maxSize;
+    private float minSize;
 
     private ArrayList<Gift> giftList;
     private Matrix m = new Matrix();
@@ -49,6 +51,8 @@ public class GiftRainView extends View {
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.DropDownStyle);
         count = typedArray.getInt(R.styleable.DropDownStyle_gift_count, 20);
         speed = typedArray.getInt(R.styleable.DropDownStyle_gift_speed, 100);
+        minSize = typedArray.getFloat(R.styleable.DropDownStyle_gift_min_size, 0.5f);
+        maxSize = typedArray.getFloat(R.styleable.DropDownStyle_gift_max_size, 1.2f);
         background = typedArray.getInt(R.styleable.DropDownStyle_gift_background, android.R.color.white);
         typedArray.recycle();
         init();
@@ -138,10 +142,22 @@ public class GiftRainView extends View {
         animator.start();
     }
 
+    /**
+     * 设置要下落的物体
+     *
+     * @param images
+     */
     public void setImages(int... images) {
         imgs = images;
         setGiftCount(count);
     }
+
+    public void setSpeed(int speed) {
+        for (Gift gift : giftList) {
+            gift.setSpeed(speed);
+        }
+    }
+
 
     public void cutGiftCount(int quantity) {
         if (quantity > giftList.size())
@@ -184,7 +200,11 @@ public class GiftRainView extends View {
         private Bitmap bitmap;
 
         public Gift(float xRange, Bitmap originalBitmap, int speed) {
-            width = (int) (originalBitmap.getWidth() * (Math.random() + 0.3));
+            double widthRandom = Math.random();
+            if (widthRandom < minSize || widthRandom > maxSize) {
+                widthRandom = maxSize;
+            }
+            width = (int) (originalBitmap.getWidth() * widthRandom);
             float hwRatio = originalBitmap.getHeight() * 1.0f / originalBitmap.getWidth();
             height = (int) (width * hwRatio);
             x = (float) Math.random() * (xRange - width);
@@ -192,6 +212,10 @@ public class GiftRainView extends View {
             this.speed = speed + (float) Math.random() * 550;
             rotation = (float) Math.random() * 180 - 90;
             rotationSpeed = (float) Math.random() * 90 - 45;
+        }
+
+        public void setSpeed(float speed) {
+            this.speed = speed;
         }
     }
 }

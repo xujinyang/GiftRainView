@@ -10,17 +10,19 @@
 ### Step 1
 ##### Install with gradle
         dependencies {
-            compile 'com.xujinyang.GiftRainView:library:1.2.0'
+            compile 'com.xujinyang.GiftRainView:library:1.3.0'
         }
 ### Step 2
 
-       <me.jamesxu.giftrainview.GiftRainView
-            android:id="@+id/dropview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:gift_background="@android:color/white"
-            app:gift_count="20"
-            app:gift_speed="100" />
+      <me.jamesxu.giftrainview.GiftRainView
+        android:id="@+id/gift_rain_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:gift_background="@android:color/white"
+        app:gift_count="15"
+        app:gift_max_size="0.8"
+        app:gift_min_size="0.5"
+        app:gift_speed="300" />
       
 ####attrs:
 
@@ -29,6 +31,8 @@
 |gift_background|color|背景颜色|
 |gift_count|integer|屏幕内物体数量|
 |gift_speed|integer|物体移动最小速度|
+|gift_max_size|float|最大的物体比例|
+|gift_min_size|float|最小的物体比例|
 
 ### Step 3
 ```

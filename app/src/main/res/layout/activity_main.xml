@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:gift_background="@android:color/white"
-        app:gift_count="20"
-        app:gift_speed="100" />
+        app:gift_count="15"
+        app:gift_max_size="0.8"
+        app:gift_min_size="0.5"
+        app:gift_speed="300" />
 
 </LinearLayout>
